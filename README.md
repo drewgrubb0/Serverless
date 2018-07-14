@@ -1,2 +1,2 @@
 # Serverless
-A Repository for keeping AWS / Serverless / Cloudformation templates, scripts, and information
+A Repository for testing and deploying AWS Lambda functions using Jenkins Pipeline integration

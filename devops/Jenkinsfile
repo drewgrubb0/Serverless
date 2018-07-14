@@ -1,0 +1,28 @@
+try{
+    node
+    {
+        stage("Cleanup")
+        {
+            
+        }
+
+        stage("Project Checkout")
+        {
+            checkout scm
+        }
+
+        stage("Build Serverless Instance")
+        {
+            //sls create_domain
+        }
+
+        stage("Deploy Serverless Instance")
+        {
+            //sls deploy
+        }
+    }
+} catch(Exception e){
+    throw e
+} finally{
+
+}
