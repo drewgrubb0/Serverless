@@ -1,24 +1,35 @@
-try{
-    node
-    {
-        stage("Cleanup")
-        {
-            
+try {
+    pipeline {
+
+        agent any
+        environment {
+
         }
 
-        stage("Project Checkout")
-        {
-            checkout scm
-        }
+        stages {
+            stage("Cleanup") {
+                steps{
 
-        stage("Build Serverless Instance")
-        {
-            //sls create_domain
-        }
+                }
+            }
 
-        stage("Deploy Serverless Instance")
-        {
-            //sls deploy
+            stage("Project Checkout") {
+                steps{
+                    checkout scm
+                }
+            }
+
+            stage("Build Serverless Instance") {
+                steps{
+                    
+                }//sls create_domain
+            }
+
+            stage("Deploy Serverless Instance") {
+                steps{
+                    
+                }//sls deploy
+            }
         }
     }
 } catch(Exception e){
