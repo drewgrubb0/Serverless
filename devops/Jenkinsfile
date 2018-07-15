@@ -19,6 +19,13 @@ try {
                 }
             }
 
+            stage("Get Secrets") {
+                steps{
+                    //get google api key from s3 bucket
+                    //sed into serverless.yml
+                }
+            }
+
             stage("Build Serverless Instance") {
                 steps{
                     
