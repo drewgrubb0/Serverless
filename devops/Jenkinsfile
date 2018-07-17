@@ -1,15 +1,19 @@
 try {
     pipeline {
-
+        
         agent any
-        environment {
+        parameters{
 
+        }
+
+        environment {
+            
         }
 
         stages {
             stage("Cleanup") {
                 steps{
-
+                    deleteDir()
                 }
             }
 

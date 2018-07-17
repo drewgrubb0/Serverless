@@ -29,3 +29,7 @@ functions:
 
 resources:
   Resources:
+    SecretsBucket:
+      Type: "AWS::S3::Bucket"
+    
+    
