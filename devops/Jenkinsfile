@@ -16,7 +16,7 @@ try {
             }
 
             stage("Project Checkout") {
-                checkout scm
+                
             }
 
             stage("Get Secrets") {
