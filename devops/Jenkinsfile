@@ -1,7 +1,6 @@
 try {
     pipeline {
-        
-        agent any
+    
         parameters{
 
         }
@@ -9,37 +8,28 @@ try {
         environment {
             
         }
-
-        stages {
+        
+        node{
+            
             stage("Cleanup") {
-                steps{
-                    deleteDir()
-                }
+                deleteDir()
             }
 
             stage("Project Checkout") {
-                steps{
-                    checkout scm
-                }
+                checkout scm
             }
 
             stage("Get Secrets") {
-                steps{
-                    //get google api key from s3 bucket
-                    //sed into serverless.yml
-                }
+                //get google api key from s3 bucket
+                //sed into serverless.yml
             }
 
             stage("Build Serverless Instance") {
-                steps{
-                    
-                }//sls create_domain
+                //sls create_domain
             }
 
             stage("Deploy Serverless Instance") {
-                steps{
-                    
-                }//sls deploy
+                //sls deploy
             }
         }
     }
