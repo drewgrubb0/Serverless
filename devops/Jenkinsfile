@@ -2,13 +2,12 @@ try {
     pipeline {
     
         parameters{
-
+            choice(
+                choices: 'patch\nminor\nmajor',
+                description: "Version update type"
+            )
         }
 
-        environment {
-            
-        }
-        
         node{
             
             stage("Cleanup") {
@@ -19,13 +18,21 @@ try {
                 checkout scm
             }
 
+            stage("Create Tag"){
+
+            }
+
             stage("Get Secrets") {
                 //get google api key from s3 bucket
                 //sed into serverless.yml
             }
 
-            stage("Build Serverless Instance") {
-                //sls create_domain
+            stage("Build Docker image"){
+
+            }
+
+            stage("Release Tag"){
+
             }
 
             stage("Deploy Serverless Instance") {
