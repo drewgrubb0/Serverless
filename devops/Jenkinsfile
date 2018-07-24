@@ -1,5 +1,8 @@
 try {
 
+    VERSION = "0.0.1"
+    SERVERLESS_IMAGE = ""
+
     pipeline {
     
         parameters{
@@ -29,7 +32,7 @@ try {
             }
 
             stage("Build Docker image"){
-
+                docker.build("serverless:${VERSION}")
             }
 
             stage("Release Docker image"){
@@ -41,7 +44,9 @@ try {
             }
 
             stage("Deploy Serverless Instance") {
-                sls deploy
+                docker.image("${SERVERLESS_IMAGE}").inside(){
+                    sh "sls deploy"
+                }
             }
         }
     }
