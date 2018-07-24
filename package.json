@@ -1,0 +1,22 @@
+{
+  "name": "serverless",
+  "version": "0.0.1",
+  "description": "Serverless setup for lambda functions",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/drewgrubb0/Serverless.git"
+  },
+  "author": "Drew Grubb",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/drewgrubb0/Serverless/issues"
+  },
+  "homepage": "https://github.com/drewgrubb0/Serverless#readme"
+}

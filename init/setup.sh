@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-serverless create --template aws-python3 --path drewgrubb-test-api
-cd drewgrubb-test-api
+serverless create --template aws-python3
 git init
 virtualenv venv --python=python3
 source venv/bin/activate

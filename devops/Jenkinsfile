@@ -1,4 +1,5 @@
 try {
+
     pipeline {
     
         parameters{
@@ -31,12 +32,16 @@ try {
 
             }
 
+            stage("Release Docker image"){
+
+            }
+
             stage("Release Tag"){
 
             }
 
             stage("Deploy Serverless Instance") {
-                //sls deploy
+                sls deploy
             }
         }
     }

@@ -14,14 +14,14 @@ provider:
         - "arn:aws:execute-api:*:*:*"
 
 functions:
-  maps:
-    handler: maps_handler.main
+  test:
+    handler: functions/test_handler.main
     timeout: 5
     memorySize: 128
     environment:
-      api-key: "__api-key__"
+      api_key: "k"
     events:
-      - schedule: rate(15 minutes)
+#      - schedule: rate(15 minutes)
       - http:
           path: test
           method: get
