@@ -1,6 +1,6 @@
 try {
 
-    def APPLICATION_NAME = "Serverless"
+    def APPLICATION_NAME = "serverless"
     def VERSION = "0.0.1"
     def VERSION_INC = "patch"
     def SERVERLESS_IMAGE = ""
@@ -37,7 +37,7 @@ try {
             }
 
             stage("Build Docker image"){
-                SERVERLESS_IMAGE = docker.build("docker", "-t serverless:${VERSION} -f ./devops/docker-image/Dockerfile")
+                SERVERLESS_IMAGE = docker.build("${APPLICATION_NAME}:${VERSION}", "./devops/docker-image/")
             }
 
             stage("Release Docker image"){
