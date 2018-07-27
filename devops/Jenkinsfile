@@ -9,7 +9,7 @@ try {
     
         parameters{
             choice(
-                name: "VERSION_INC"
+                name: "VERSION_INC",
                 choices: 'patch\nminor\nmajor',
                 description: "Version update type"
             )
