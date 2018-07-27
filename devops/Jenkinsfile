@@ -1,12 +1,15 @@
 try {
 
-    VERSION = "0.0.1"
-    SERVERLESS_IMAGE = ""
+    def APPLICATION_NAME = "Serverless"
+    def VERSION = "0.0.1"
+    def VERSION_INC = "patch"
+    def SERVERLESS_IMAGE = ""
 
     pipeline {
     
         parameters{
             choice(
+                name: "VERSION_INC"
                 choices: 'patch\nminor\nmajor',
                 description: "Version update type"
             )
@@ -20,6 +23,8 @@ try {
 
             stage("Project Checkout") {
                 checkout scm
+                
+                VERSION_INC = params.VERSION_INC
             }
 
             stage("Create Tag"){
@@ -32,7 +37,7 @@ try {
             }
 
             stage("Build Docker image"){
-                docker.build("serverless:${VERSION}")
+                SERVERLESS_IMAGE = docker.build("docker", "-t serverless:${VERSION} -f ./devops/docker-image/Dockerfile")
             }
 
             stage("Release Docker image"){
@@ -45,6 +50,7 @@ try {
 
             stage("Deploy Serverless Instance") {
                 docker.image("${SERVERLESS_IMAGE}").inside(){
+                    sh "cd $WORKSPACE && pip install -r requirements.txt"
                     sh "sls deploy"
                 }
             }
