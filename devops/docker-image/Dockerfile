@@ -7,3 +7,4 @@ RUN apk add curl jq && \
 
 RUN npm install serverless-python-requirements && \
     npm install serverless
+    
