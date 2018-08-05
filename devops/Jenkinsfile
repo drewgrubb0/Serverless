@@ -49,8 +49,8 @@ try {
             }
 
             stage("Deploy Serverless Instance") {
-                SERVERLESS_IMAGE.inside(){
-                    sh "cd $WORKSPACE && pip install -r requirements.txt"
+                docker.image(SERVERLESS_IMAGE).inside(){
+                    sh "cd $WORKSPACE && sudo pip install -r requirements.txt"
                     sh "sls deploy"
                 }
             }
