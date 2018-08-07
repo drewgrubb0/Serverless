@@ -8,9 +8,16 @@ RUN apk add curl jq sudo shadow && \
 RUN npm install serverless-python-requirements && \
     npm install serverless
 
-RUN useradd --uid 500 jenkins && \
-    echo "jenkins ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
-    groupadd docker && \
-    usermod -aG docker jenkins
+USER root
 
-USER jenkins
+ENV GROUP_ID=500 \
+    GROUP_NAME=jenkins \
+    USER_ID=500 \
+    USER_NAME=jenkins
+
+RUN groupadd -g ${GROUP_ID} ${GROUP_NAME} && \
+    useradd -g ${GROUP_ID} iu ${USER_ID} ${USER_NAME} && \
+    usermod -aG wheel ${USER_NAME} && \
+    echo "%wheel    ALL=(ALL)   NOPASSWD: ALL" >> "/etc/sudoers"
+
+USER ${USER_NAME}}

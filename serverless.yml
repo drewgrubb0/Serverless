@@ -14,8 +14,8 @@ provider:
         - "arn:aws:execute-api:*:*:*"
 
 functions:
-  test:
-    handler: functions/test_handler.main
+  patent:
+    handler: functions/patent_handler.main
     timeout: 5
     memorySize: 128
     environment:
@@ -23,7 +23,7 @@ functions:
     events:
 #      - schedule: rate(15 minutes)
       - http:
-          path: test
+          path: patent
           method: get
           cors: true
 
