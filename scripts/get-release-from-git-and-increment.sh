@@ -51,8 +51,13 @@ if [ ! -f "${SEMVER_FILE}" ]; then
     chmod +x "${SEMVER_FILE}"
 fi
 
-if [ ! -f "${SEMVER_FILE}" ] || [ $? -ne 0 ]; then
+if [ $? -ne 0 ]; then
     echo "Error downloading SemVer. Exiting..."
+    exit 1
+fi
+
+if [ ! -f "${SEMVER_FILE}" ]; then
+    echo "Semver file not downloaded/found. Exiting..."
     exit 1
 fi
 
