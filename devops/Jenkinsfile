@@ -30,10 +30,12 @@ try {
         stage("Load Resources"){
             writeFile file:"tmp/get-release-from-git-and-increment.sh", text: "/scripts/get-release-from-git-and-increment.sh"
             sh "chmod +x tmp/get-release-from-git-and-increment.sh"
+            writeFile file:"tmp/push-release-to-git.sh", text: "/scripts/push-release-to-git.sh"
+            sh "chmod +x tmp/push-release-to-git.sh"
         }
 
         stage("Create Tag"){
-            sh "./scripts/get-release-from-git-and-increment.sh"
+            sh "./tmp/get-release-from-git-and-increment.sh"
         }
 
         stage("Build Docker Image"){
@@ -48,7 +50,7 @@ try {
         }
 
         stage("Release Tag"){
-            sh "./scripts/push-release-to-git.sh"
+            sh "./tmp/push-release-to-git.sh"
         }
 
         stage("Integrate Secrets"){
