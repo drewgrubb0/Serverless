@@ -32,7 +32,7 @@ try {
         }
 
         stage("Create Tag"){
-            sh "./get-release-from-git-and-increment.sh"
+            sh "./scripts/get-release-from-git-and-increment.sh"
         }
 
         stage("Build Docker Image"){
@@ -47,7 +47,7 @@ try {
         }
 
         stage("Release Tag"){
-            sh "./push-release-to-git.sh"
+            sh "./scripts/push-release-to-git.sh"
         }
 
         stage("Integrate Secrets"){
