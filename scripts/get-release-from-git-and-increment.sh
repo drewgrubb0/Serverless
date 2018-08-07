@@ -32,7 +32,7 @@ if [[ "${CURRENT_COMMIT}" == "${CURRENT_TAG_COMMIT}" ]]; then
 fi
 
 git diff-index --quiet HEAD --
-if [ $? -ne 0 ]; then
+if [[ $? -ne 0 ]]; then
     echo "There are uncommitted changes on the current branch. Exiting..."
     exit 1
 fi
