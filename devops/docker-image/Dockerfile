@@ -16,7 +16,7 @@ ENV GROUP_ID=500 \
     USER_NAME=jenkins
 
 RUN groupadd -g ${GROUP_ID} ${GROUP_NAME} && \
-    useradd -g ${GROUP_ID} iu ${USER_ID} ${USER_NAME} && \
+    useradd -g ${GROUP_ID} -u ${USER_ID} ${USER_NAME} && \
     usermod -aG wheel ${USER_NAME} && \
     echo "%wheel    ALL=(ALL)   NOPASSWD: ALL" >> "/etc/sudoers"
 

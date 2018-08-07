@@ -1,61 +1,66 @@
+def projectProperties=[
+    parameters([
+        choice(name: "VERSION_INCREMENT",
+                choices: "none\npatch\nminor\nmajor",
+                description: "Version to increment artifact by"),
+
+        booleanParam(name: "DEBUG",
+                        description: "Enable verbose console output",
+                        defaultValue: false)
+    ])
+]
+
 try {
 
     def APPLICATION_NAME = "serverless"
     def VERSION = "0.0.1"
-    def VERSION_INC = "patch"
+    def VERSION_INCREMENT = "patch"
     def SERVERLESS_IMAGE = ""
 
-    pipeline {
-    
-        parameters{
-            choice(
-                name: "VERSION_INC",
-                choices: 'patch\nminor\nmajor',
-                description: "Version update type"
-            )
+    node(){
+        stage("Cleanup"){
+            deleteDir()
         }
 
-        node{
-            
-            stage("Cleanup") {
-                deleteDir()
+        stage("Checkout Project"){
+            checkout scm
+        }
+
+        stage("Load Resources"){
+            sh "chmod +x ./scripts/get-release-from-git-and-increment.sh"
+            sh "chmod +x ./push-release-to-git.sh"
+        }
+
+        stage("Create Tag"){
+            sh "./get-release-from-git-and-increment.sh"
+        }
+
+        stage("Build Docker Image"){
+            SERVERLESS_IMAGE = docker.build("sls", "-t serverless:${VERSION} -f ./devops/docker-image/Dockerfile .")
+            docker.image(SERVERLESS_IMAGE).inside{
+                sh "cd ${WORKSPACE} && sudo -H python3.6 -m pip install -r requirements.txt"
             }
+        }
 
-            stage("Project Checkout") {
-                checkout scm
-                
-                VERSION_INC = params.VERSION_INC
-            }
+        stage("Release Docker Image"){
 
-            stage("Create Tag"){
+        }
 
-            }
+        stage("Release Tag"){
+            sh "./push-release-to-git.sh"
+        }
 
-            stage("Get Secrets") {
-                //get google api key from s3 bucket
-                //sed into serverless.yml
-            }
+        stage("Integrate Secrets"){
 
-            stage("Build Docker image"){
-                SERVERLESS_IMAGE = docker.build("${APPLICATION_NAME}:${VERSION}", "./devops/docker-image/")
-            }
+        }
 
-            stage("Release Docker image"){
-
-            }
-
-            stage("Release Tag"){
-
-            }
-
-            stage("Deploy Serverless Instance") {
-                docker.image(SERVERLESS_IMAGE).inside(){
-                    sh "cd $WORKSPACE && sudo pip install -r requirements.txt"
-                    sh "sls deploy"
-                }
+        stage("Deploy Serverless"){
+            docker.image(SERVERLESS_IMAGE).inside{
+                sh "sls deploy"
             }
         }
     }
+
 } catch(Exception e){
     throw e
 } finally{
