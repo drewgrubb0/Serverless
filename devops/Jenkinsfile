@@ -28,10 +28,8 @@ try {
         }
 
         stage("Load Resources"){
-            writeFile file:"tmp/get-release-from-git-and-increment.sh", text: "/scripts/get-release-from-git-and-increment.sh"
-            sh "chmod +x tmp/get-release-from-git-and-increment.sh"
-            writeFile file:"tmp/push-release-to-git.sh", text: "/scripts/push-release-to-git.sh"
-            sh "chmod +x tmp/push-release-to-git.sh"
+            sh "cp ./scripts/get-release-from-git-and-increment.sh ./tmp/get-release-from-git-and-increment.sh"
+            sh "chmod +x ./tmp/get-release-from-git-and-increment.sh"
         }
 
         stage("Create Tag"){
