@@ -51,12 +51,12 @@ if [ -f "${SEMVER_FILE}" ]; then
     chmod +x "${SEMVER_FILE}"
 fi
 
-if [ -f "${SEMVER_FILE}" || $? -ne 0 ]; then
+if [ -f "${SEMVER_FILE}" ] || [ $? -ne 0 ]; then
     echo "Error downloading SemVer. Exiting..."
     exit 1
 fi
 
-if [ "${NEW_TAG}" -ne "0.0.1" ]; then
+if [ "${NEW_TAG}" != "0.0.1" ]; then
     NEW_TAG=$("${SEMVER_FILE}" bump ${VERSION_INCREMENT} ${CURRENT_TAG})
 fi
 

@@ -29,8 +29,12 @@ try {
 
         stage("Load Resources"){
             sh "mkdir ./tmp"
+
             sh "cp ./scripts/get-release-from-git-and-increment.sh ./tmp/get-release-from-git-and-increment.sh"
             sh "chmod +x ./tmp/get-release-from-git-and-increment.sh"
+
+            sh "cp ./scripts/push-release-to-git.sh ./tmp/push-release-to-git.sh"
+            sh "chmod +x ./tmp/push-release-to-git.sh"
         }
 
         stage("Create Tag"){
@@ -39,7 +43,7 @@ try {
 
         stage("Build Docker Image"){
             SERVERLESS_IMAGE = docker.build("sls", "-t serverless:${VERSION} -f ./devops/docker-image/Dockerfile .")
-            docker.image(SERVERLESS_IMAGE).inside{
+            SERVERLESS_IMAGE.inside{
                 sh "cd ${WORKSPACE} && sudo -H python3.6 -m pip install -r requirements.txt"
             }
         }
