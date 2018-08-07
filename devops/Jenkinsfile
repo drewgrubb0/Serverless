@@ -28,6 +28,7 @@ try {
         }
 
         stage("Load Resources"){
+            sh "mkdir ./tmp"
             sh "cp ./scripts/get-release-from-git-and-increment.sh ./tmp/get-release-from-git-and-increment.sh"
             sh "chmod +x ./tmp/get-release-from-git-and-increment.sh"
         }
