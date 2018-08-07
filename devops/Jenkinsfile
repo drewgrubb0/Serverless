@@ -28,7 +28,7 @@ try {
 
         stage("Load Resources"){
             sh "chmod +x ./scripts/get-release-from-git-and-increment.sh"
-            sh "chmod +x ./push-release-to-git.sh"
+            sh "chmod +x ./scripts/push-release-to-git.sh"
         }
 
         stage("Create Tag"){
