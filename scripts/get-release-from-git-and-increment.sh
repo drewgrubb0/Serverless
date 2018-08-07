@@ -46,12 +46,12 @@ mkdir -p "${ROOT_DIR}/tmp/tagging"
 
 echo "Downloading semver..."
 SEMVER_FILE="${ROOT_DIR}/tmp/semver"
-if [ -f "${SEMVER_FILE}" ]; then
+if [ ! -f "${SEMVER_FILE}" ]; then
     curl -o "${SEMVER_FILE}" https://raw.githubusercontent.com/fsaintjacques/semver-tool/2.0.0/src/semver
     chmod +x "${SEMVER_FILE}"
 fi
 
-if [ -f "${SEMVER_FILE}" ] || [ $? -ne 0 ]; then
+if [ ! -f "${SEMVER_FILE}" ] || [ $? -ne 0 ]; then
     echo "Error downloading SemVer. Exiting..."
     exit 1
 fi
