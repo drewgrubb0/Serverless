@@ -1,6 +1,7 @@
 #!/bin/bash
 
-NEW_TAG=${NEW_TAG}
+ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+NEW_TAG=$(<"${ROOT_DIR}/version.txt")
 
 TAG=$(git describe --always --tags)
 echo "Current tag: ${TAG}"
