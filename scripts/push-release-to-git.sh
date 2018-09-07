@@ -4,6 +4,7 @@ NEW_TAG=${NEW_TAG}
 
 TAG=$(git describe --always --tags)
 echo "Current tag: ${TAG}"
+echo "New tag: ${NEW_TAG}"
 
 if [ -z ${NEW_TAG} ]; then
     echo "No new tag has been created. Exiting..."
