@@ -68,7 +68,9 @@ fi
 echo "New tag is ${NEW_TAG}"
 echo "${NEW_TAG}" > "${ROOT_DIR}/version.txt"
 
-git tag ${NEW_TAG}
+git tag "${NEW_TAG}"
 echo "Tag successfully created."
+
+export NEW_TAG="${NEW_TAG}"
 
 rm -rf "${ROOT_DIR}/tmp/tagging"
