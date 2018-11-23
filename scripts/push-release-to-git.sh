@@ -14,8 +14,11 @@ fi
 
 if [ "${TAG}" == "${NEW_TAG}" ]; then
     echo "Tag is not being incremented. Exiting..."
-    exit 1
+    exit 0
 fi
+
+git tag "${NEW_TAG}"
+echo "Tag successfully created."
 
 git config --global push.default simple
 git push --tags

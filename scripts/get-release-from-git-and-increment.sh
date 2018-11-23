@@ -10,7 +10,7 @@ ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 
 if [ "${VERSION_INCREMENT}" == "none" ]; then
     echo "Not releasing a new tag. Exiting..."
-    exit 1
+    exit 0
 fi
 
 CURRENT_COMMIT=$(git rev-parse HEAD)
@@ -67,9 +67,6 @@ fi
 
 echo "New tag is ${NEW_TAG}"
 echo "${NEW_TAG}" > "${ROOT_DIR}/version.txt"
-
-git tag "${NEW_TAG}"
-echo "Tag successfully created."
 
 export NEW_TAG="${NEW_TAG}"
 
